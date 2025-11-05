@@ -10,7 +10,7 @@ async function test() {
   console.log("Token:", token);
 
   // 2️⃣ Akses Lambda API Gateway
-  const apiRes = await fetch("https://YOUR_API_ID.execute-api.ap-southeast-1.amazonaws.com/prod/protected", {
+  const apiRes = await fetch("https://tkk2ekgzk5.execute-api.ap-southeast-2.amazonaws.com/default/verify_user", {
     headers: { "Authorization": token }
   });
 
