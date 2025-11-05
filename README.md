@@ -56,7 +56,10 @@ Handles protected endpoints:
 | passwordHash | String | -    |
 
 ---
-
+## Setup
+* Create DynamoDB table
+* Upload zipped lambda function with node_modules 
+---
 ## Run
 ```
 npm install
