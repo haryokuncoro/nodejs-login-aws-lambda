@@ -1,8 +1,6 @@
-import jwt from "jsonwebtoken";
+const jwt = require("jsonwebtoken");
 
-const SECRET = process.env.JWT_SECRET || "super-secret-key";
-
-export const handler = async (event) => {
+exports.handler = async (event) => {
   const token = event.headers?.Authorization || event.headers?.authorization;
 
   if (!token) {
@@ -10,11 +8,8 @@ export const handler = async (event) => {
   }
 
   try {
-    const decoded = jwt.verify(token, SECRET);
-    return respond(200, {
-      message: `Hello ${decoded.sub}, role: ${decoded.role}`,
-      user: decoded
-    });
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || "super-secret-key");
+    return respond(200, { message: `Hello ${decoded.sub}`, user: decoded });
   } catch (err) {
     return respond(401, { error: "Invalid or expired token" });
   }
@@ -24,6 +19,6 @@ function respond(status, body) {
   return {
     statusCode: status,
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
+    body: JSON.stringify(body)
   };
 }
